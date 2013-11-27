@@ -1,0 +1,29 @@
+#!/usr/bin/python
+__author__ = 'bolshieludi'
+import sys
+
+for arg in sys.argv[1:]:
+    print arg
+
+    f = open(arg)
+    lines = f.read()
+    f.close
+
+    lines = lines.split("\n")
+    newFile = ""
+
+    for line in lines:
+        if len(line) > 0:
+            if line[0] is '"':
+                parts = line.split(" = ")
+                newFile = newFile + parts[0].upper().replace(" ", "_") + " = " + parts[1] + "\n"
+            else:
+                newFile = newFile + line + "\n"
+        else:
+            newFile = newFile + line + "\n"
+
+    print newFile
+
+    f = open(arg, "w")
+    f.write(newFile)
+    f.close()
